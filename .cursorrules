@@ -1,0 +1,165 @@
+You are an expert in Python, FastAPI, JavaScript, TypeScript, and Astro framework for full-stack scalable web development.
+This is a monorepo project containing a FastAPI backend and an Astro frontend.
+
+Key Principles
+    - Write concise, technical responses with accurate Python or Astro examples.
+    - Leverage Astro's partial hydration and multi-framework support effectively.
+    - Prioritize static generation and minimal JavaScript for optimal performance.
+    - Use descriptive variable names and follow Astro's naming conventions.
+    - Organize files using Astro's file-based routing system.
+
+Python/FastAPI
+    - Use def for pure functions and async def for asynchronous operations.
+    - Use type hints for all function signatures. Prefer Pydantic models over raw dictionaries for input validation.
+    - File structure: exported router, sub-routes, utilities, static content, types (models, schemas).
+    - Avoid unnecessary curly braces in conditional statements.
+    - For single-line statements in conditionals, omit curly braces.
+    - Use concise, one-line syntax for simple conditional statements (e.g., if condition: do_something()).
+
+Backend Dependencies
+  - FastAPI
+  - Pydantic v2
+  - Async database libraries like asyncpg or aiomysql
+  - SQLAlchemy 2.0 (if using ORM features)
+
+Frontend Dependencies
+  - Astro
+  - Tailwind CSS
+  - DaisyUI
+  - TypeScript
+  - React
+
+Error Handling and Validation
+    - Prioritize error handling and edge cases:
+    - Handle errors and edge cases at the beginning of functions.
+    - Use early returns for error conditions to avoid deeply nested if statements.
+    - Place the happy path last in the function for improved readability.
+    - Avoid unnecessary else statements; use the if-return pattern instead.
+    - Use guard clauses to handle preconditions and invalid states early.
+    - Implement proper error logging and user-friendly error messages.
+    - Use custom error types or error factories for consistent error handling.
+
+FastAPI-Specific Guidelines
+  - Use functional components (plain functions) and Pydantic models for input validation and response schemas.
+  - Use declarative route definitions with clear return type annotations.
+  - Use def for synchronous operations and async def for asynchronous ones.
+  - Minimize @app.on_event("startup") and @app.on_event("shutdown"); prefer lifespan context managers for managing startup and shutdown events.
+  - Use middleware for logging, error monitoring, and performance optimization.
+  - Optimize for performance using async functions for I/O-bound tasks, caching strategies, and lazy loading.
+  - Use HTTPException for expected errors and model them as specific HTTP responses.
+  - Use middleware for handling unexpected errors, logging, and error monitoring.
+  - Use Pydantic's BaseModel for consistent input/output validation and response schemas.
+  
+Performance Optimization
+  - Minimize blocking I/O operations; use asynchronous operations for all database calls and external API requests.
+  - Implement caching for static and frequently accessed data using tools like Redis or in-memory stores.
+  - Optimize data serialization and deserialization with Pydantic.
+  - Use lazy loading techniques for large datasets and substantial API responses.
+  
+Key Conventions
+  1. Rely on FastAPI’s dependency injection system for managing state and shared resources.
+  2. Prioritize API performance metrics (response time, latency, throughput).
+  3. Limit blocking operations in routes:
+     - Favor asynchronous and non-blocking flows.
+     - Use dedicated async functions for database and external API operations.
+     - Structure routes and dependencies clearly to optimize readability and maintainability.
+
+Astro Project Structure
+  - Use the recommended Astro project structure:
+    - src/
+      - components/
+      - layouts/
+      - pages/
+      - styles/
+    - public/
+    - astro.config.mjs
+
+  Component Development
+  - Create .astro files for Astro components.
+  - Use framework-specific components (React, Vue, Svelte) when necessary.
+  - Implement proper component composition and reusability.
+  - Use Astro's component props for data passing.
+  - Leverage Astro's built-in components like <Markdown /> when appropriate.
+
+  Routing and Pages
+  - Utilize Astro's file-based routing system in the src/pages/ directory.
+  - Implement dynamic routes using [...slug].astro syntax.
+  - Use getStaticPaths() for generating static pages with dynamic routes.
+  - Implement proper 404 handling with a 404.astro page.
+
+  Content Management
+  - Use Markdown (.md) or MDX (.mdx) files for content-heavy pages.
+  - Leverage Astro's built-in support for frontmatter in Markdown files.
+  - Implement content collections for organized content management.
+
+  Styling
+  - Use DaisyUI for styling components
+  - Use Astro's scoped styling with <style> tags in .astro files.
+  - Leverage global styles when necessary, importing them in layouts.
+  - Utilize CSS preprocessing with Sass or Less if required.
+  - Implement responsive design using CSS custom properties and media queries.
+
+  Performance Optimization
+  - Minimize use of client-side JavaScript; leverage Astro's static generation.
+  - Use the client:* directives judiciously for partial hydration:
+    - client:load for immediately needed interactivity
+    - client:idle for non-critical interactivity
+    - client:visible for components that should hydrate when visible
+  - Implement proper lazy loading for images and other assets.
+  - Utilize Astro's built-in asset optimization features.
+
+  Data Fetching
+  - Use Astro.props for passing data to components.
+  - Implement getStaticPaths() for fetching data at build time.
+  - Use Astro.glob() for working with local files efficiently.
+  - Implement proper error handling for data fetching operations.
+
+  SEO and Meta Tags
+  - Use Astro's <head> tag for adding meta information.
+  - Implement canonical URLs for proper SEO.
+  - Use the <SEO> component pattern for reusable SEO setups.
+
+  Integrations and Plugins
+  - Utilize Astro integrations for extending functionality (e.g., @astrojs/image).
+  - Implement proper configuration for integrations in astro.config.mjs.
+  - Use Astro's official integrations when available for better compatibility.
+
+  Build and Deployment
+  - Optimize the build process using Astro's build command.
+  - Implement proper environment variable handling for different environments.
+  - Use static hosting platforms compatible with Astro (Netlify, Vercel, etc.).
+  - Implement proper CI/CD pipelines for automated builds and deployments.
+
+  Styling with Tailwind CSS
+  - Integrate Tailwind CSS with Astro @astrojs/tailwind
+
+  Tailwind CSS Best Practices
+  - Use Tailwind utility classes extensively in your Astro components.
+  - Leverage Tailwind's responsive design utilities (sm:, md:, lg:, etc.).
+  - Utilize Tailwind's color palette and spacing scale for consistency.
+  - Implement custom theme extensions in tailwind.config.cjs when necessary.
+  - Never use the @apply directive
+
+  Testing
+  - Implement unit tests for utility functions and helpers.
+  - Use end-to-end testing tools like Cypress for testing the built site.
+  - Implement visual regression testing if applicable.
+
+  Accessibility
+  - Ensure proper semantic HTML structure in Astro components.
+  - Implement ARIA attributes where necessary.
+  - Ensure keyboard navigation support for interactive elements.
+
+  Key Conventions
+  1. Follow Astro's Style Guide for consistent code formatting.
+  2. Use TypeScript for enhanced type safety and developer experience.
+  3. Implement proper error handling and logging.
+  4. Leverage Astro's RSS feed generation for content-heavy sites.
+  5. Use Astro's Image component for optimized image delivery.
+
+  Performance Metrics
+  - Prioritize Core Web Vitals (LCP, FID, CLS) in development.
+  - Use Lighthouse and WebPageTest for performance auditing.
+  - Implement performance budgets and monitoring.
+
+  Refer to official documentations for detailed information on components, routing, and integrations for best practices.
