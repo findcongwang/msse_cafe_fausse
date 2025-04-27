@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "astro": "^5.7.5"
+  },
+  "devDependencies": {
+    "daisyui": "^5.0.28"
   }
 }
