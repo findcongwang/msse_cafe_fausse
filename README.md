@@ -45,8 +45,9 @@ msse_cafe_fausse/
 │ ├── app/
 │ │ ├── api/              # API endpoints
 │ │ ├── core/             # Core configurations
+│ │ ├── crud/             # CRUD operations
 │ │ ├── db/               # Database setup
-│ │ ├── models/           # SQLAlchemy models
+│ │ ├── models.py         # SQLAlchemy models
 │ │ └── schemas/          # Pydantic schemas
 │ ├── migrations/         # Database migrations
 │ └── tests/              # Backend tests
