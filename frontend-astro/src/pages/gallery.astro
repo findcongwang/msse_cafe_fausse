@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import GalleryComponent from '../components/Gallery';
+import GalleryComponent from '../components/Gallery.tsx';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -13,7 +13,7 @@ interface GalleryImage {
 
 let galleryImages: GalleryImage[] = [];
 try {
-  const images = await Astro.glob('/src/images/gallery/*.{jpg,jpeg,png,gif,webp}');
+  const images = await Astro.glob('/src/assets/images/gallery/*.{jpg,jpeg,png,gif,webp}');
   
   if (images.length > 0) {
     galleryImages = images.map((image) => ({
