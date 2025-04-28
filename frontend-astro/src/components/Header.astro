@@ -1,0 +1,21 @@
+---
+const navItems = [
+  { href: '/menu', text: 'Menu' },
+  { href: '/reservations', text: 'Reservations' },
+  { href: '/about', text: 'About Us' },
+  { href: '/gallery', text: 'Gallery' },
+];
+---
+
+<header class="navbar bg-base-100/90 fixed top-0 z-50 backdrop-blur">
+  <div class="navbar-start">
+    <a href="/" class="text-4xl monsieur-la-doulaise-regular">Café Fausse</a>
+  </div>
+  <div class="navbar-end">
+    <ul class="menu menu-horizontal">
+      {navItems.map(item => (
+        <li><a href={item.href} class="link link-hover">{item.text}</a></li>
+      ))}
+    </ul>
+  </div>
+</header> 

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.monsieur-la-doulaise-regular {
+  font-family: "Monsieur La Doulaise", cursive;
+  font-weight: 500;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply text-gray-900 antialiased;
+} 
