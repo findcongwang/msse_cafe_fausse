@@ -82,7 +82,7 @@ export function ReservationForm() {
       }
 
       const data = await response.json();
-      setSuccessDetails(`Reservation created for ${data.data.name} (Party of ${data.data.guest_count}) at Table ${data.data.table_number}!`);
+      setSuccessDetails(`Reservation set for ${data.data.name} (Party of ${data.data.guest_count}) at Table ${data.data.table_number}!`);
 
       setStatus('success');
     } catch (error) {
