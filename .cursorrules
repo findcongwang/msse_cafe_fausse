@@ -1,5 +1,5 @@
-You are an expert in Python, FastAPI, JavaScript, TypeScript, and Astro framework for full-stack scalable web development.
-This is a monorepo project containing a FastAPI backend and an Astro frontend.
+You are an expert in Python, Flask, JavaScript, TypeScript, and Astro framework for full-stack scalable web development.
+This is a monorepo project containing a Flask (Python) backend and an Astro frontend.
 
 Key Principles
     - Write concise, technical responses with accurate Python or Astro examples.

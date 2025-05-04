@@ -22,7 +22,7 @@ Café Fausse's website combines a modern, responsive frontend with a robust back
 - **DaisyUI** - UI Component library
 
 ### Backend
-- **FastAPI** - Modern Python web framework
+- **Flask** - Python web framework
 - **SQLAlchemy** - SQL toolkit and ORM
 - **PostgreSQL** - Database
 - **Pydantic** - Data validation
@@ -32,7 +32,7 @@ Café Fausse's website combines a modern, responsive frontend with a robust back
 
 ```plaintext
 msse_cafe_fausse/
-├── frontend-astro/       # Frontend application
+├── frontend/       # Frontend application
 │ ├── src/
 │ │ ├── components/       # Reusable UI components
 │ │ ├── layouts/          # Page layouts
@@ -41,7 +41,7 @@ msse_cafe_fausse/
 │ ├── public/             # Static assets
 │ └── astro.config.mjs    # Astro configuration
 │
-├── backend-python/       # Backend application
+├── backend/       # Backend application
 │ ├── app/
 │ │ ├── api/              # API endpoints
 │ │ ├── core/             # Core configurations
@@ -89,59 +89,23 @@ npm install
 
 4. Configure database:
 ```bash
-cd ../backend-python
+cd ../backend
 poetry run alembic upgrade head
 ```
 
 ### Running Locally
 
-1. Start the backend server:
 ```bash
-cd backend-python
+cd backend
+./build_and_import_app.sh
 poetry run uvicorn app.main:app --reload
 ```
 
-2. In a new terminal, start the frontend:
-```bash
-cd frontend-astro
-npm run dev
-```
-
-Or use the root directory script to run both:
-```bash
-npm run dev
-```
-
 The application will be available at:
-- Frontend: http://localhost:4321
-- Backend API: http://localhost:3000
-- API Documentation: http://localhost:3000/docs
-
-## 📝 API Documentation
-
-The API documentation is automatically generated and can be accessed at:
-- Swagger UI: http://localhost:3000/docs
-- ReDoc: http://localhost:3000/redoc
-
-## 📦 Deployment
-
-### Frontend Deployment
-The frontend can be built using:
-```bash
-cd frontend-astro
-npm run build
-```
-
-### Backend Deployment
-The backend can be deployed using any ASGI server:
-```bash
-poetry run uvicorn app.main:app
-```
+- Frontend: http://localhost:8080
+- Backend API: http://localhost:8080/api
+- API Documentation: http://localhost:8080/api/docs
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👥 Authors
-
-- Francis Wang - Initial work - [findcongwang](https://github.com/findcongwang)

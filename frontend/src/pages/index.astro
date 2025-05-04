@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+---
+
+<Layout>
+	<main class="m-0 -mt-10">
+		<div class="w-full relative">
+			<Hero />
+		</div>
+		<section class="w-full">
+			<div class="w-full text-center py-16 px-4">
+				<h2 class="text-4xl font-bold mb-8">Hours & Location</h2>
+				<p class="text-xl mb-2">1234 Culinary Ave, Suite 100, Washington, DC 20002</p>
+				<p class="text-xl font-semibold mb-2">(202) 555-4567</p>
+				<div class="divider max-w-xs mx-auto"></div>
+				<div class="w-full mt-4">
+					<p class="text-lg">Monday–Saturday: 5:00 PM – 11:00 PM</p>
+					<p class="text-lg">Sunday: 5:00 PM – 9:00 PM</p>
+				</div>
+			</div>
+		</section>
+		<NewsletterSignup />
+	</main>
+</Layout>

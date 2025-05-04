@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GalleryComponent from '../components/Gallery.tsx';
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+let galleryImages: GalleryImage[] = [];
+try {
+  const images = await Astro.glob('/src/assets/images/gallery/*.{jpg,jpeg,png,gif,webp}');
+  
+  if (images.length > 0) {
+    galleryImages = images.map((image) => ({
+      src: image.default.src,
+      alt: image.default.src.split('/').pop()?.split('.')[0] || 'Gallery image',
+      width: image.default.width,
+      height: image.default.height,
+    }));
+  }
+} catch (error) {
+  console.error('Error loading gallery images:', error);
+}
+
+// Awards and reviews data
+const awards = [
+  {
+    title: "Culinary Excellence Award",
+    year: "2022"
+  },
+  {
+    title: "Restaurant of the Year",
+    year: "2023"
+  },
+  {
+    title: "Best Fine Dining Experience - Foodie Magazine",
+    year: "2023"
+  }
+];
+
+const reviews = [
+  {
+    text: "Exceptional ambiance and unforgettable flavors.",
+    author: "Gourmet Review"
+  },
+  {
+    text: "A must-visit restaurant for food enthusiasts.",
+    author: "The Daily Bite"
+  }
+];
+---
+
+<Layout title="Gallery | Café Fausse">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center">Our Gallery</h1>
+    
+    {/* Gallery Section */}
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-6">Restaurant Gallery</h2>
+      {galleryImages.length > 0 ? (
+        <GalleryComponent client:load images={galleryImages} />
+      ) : (
+        <p class="text-gray-600 text-center">No gallery images available at the moment.</p>
+      )}
+    </section>
+
+    {/* Awards Section */}
+    <section class="mb-16">
+      <h2 class="text-2xl font-semibold mb-6">Awards & Recognition</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {awards.map(award => (
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-medium mb-2">{award.title}</h3>
+            <p class="text-gray-600">{award.year}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Reviews Section */}
+    <section>
+      <h2 class="text-2xl font-semibold mb-6">Customer Reviews</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {reviews.map(review => (
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <blockquote class="text-lg italic mb-4">"{review.text}"</blockquote>
+            <cite class="text-gray-600">— {review.author}</cite>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout> 
