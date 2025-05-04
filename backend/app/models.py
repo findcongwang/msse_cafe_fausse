@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, Time
 from sqlalchemy.orm import relationship
-from app.db.base_class import Base
+from db.base import Base
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -23,21 +23,12 @@ class Reservation(Base):
     customer_id = Column(Integer, ForeignKey("customers.id"))
     reservation_date = Column(DateTime, nullable=False)
     table_number = Column(Integer, nullable=False)
-    duration_minutes = Column(Integer, nullable=False, default=90)  # Default 90-minute reservation
     guest_count = Column(Integer, nullable=False)
     status = Column(String, default="confirmed")  # confirmed, cancelled, completed
     created_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationship
     customer = relationship("Customer", back_populates="reservations")
-
-class Table(Base):
-    __tablename__ = "tables"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    table_number = Column(Integer, unique=True, nullable=False)
-    capacity = Column(Integer, nullable=False)
-    is_active = Column(Boolean, default=True)
 
 class Newsletter(Base):
     __tablename__ = "newsletter_subscribers"

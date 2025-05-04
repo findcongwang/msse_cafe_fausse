@@ -27,12 +27,49 @@ export function ReservationForm() {
     '7:30 PM', '8:00 PM', '8:30 PM', '9:00 PM', '9:30 PM',
   ];
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    // Accepts formats like: (123) 456-7890, 123-456-7890, 1234567890
+    const phoneRegex = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    return phoneRegex.test(phone);
+  };
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setStatus('loading');
     
+    // Validate inputs
+    const newErrors: any = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    
+    if (formData.phone && !formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (formData.phone && !validatePhone(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+    
+    if (Object.keys(newErrors).length > 0) {
+      setStatus('error');
+      setErrorMessage(newErrors.name || newErrors.email || newErrors.phone || 'An error occurred');
+      return;
+    }
+    
     try {
-      const response = await fetch('/api/reservations', {
+      const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/reservations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -42,6 +79,9 @@ export function ReservationForm() {
         const error = await response.json();
         throw new Error(error.message || 'Failed to make reservation');
       }
+
+      const data = await response.json();
+      console.log(data);
 
       setStatus('success');
     } catch (error) {

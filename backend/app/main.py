@@ -1,13 +1,20 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
+from api.reservations import reservations_bp
 
 app = Flask(__name__, static_folder='static', static_url_path='/')
-CORS(app)
 
-# API routes with /api prefix
-@app.route('/api/hello')
-def hello():
-    return jsonify({"message": "Hello from API!"})
+# Register the API controllers
+app.register_blueprint(reservations_bp)
+
+
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+
+# @app.route('/api', methods=['GET'])
+# def api_welcome():
+#     return jsonify({
+#         "message": "Welcome to the Cafe Fausse API"
+#     })
 
 # Register custom 404 error handler
 @app.errorhandler(404)
@@ -19,6 +26,9 @@ def page_not_found(e):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_static(path):
+    # Don't handle API routes here to avoid redirection
+    if path.startswith('api/'):
+        return jsonify({"error": "API endpoint not found"}), 404
     return app.send_static_file('index.html')
 
 if __name__ == '__main__':

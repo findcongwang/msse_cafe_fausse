@@ -3,8 +3,7 @@ from pydantic import PostgresDsn, field_validator, ValidationInfo
 
 class Settings(BaseSettings):
     # Core settings
-    API_V1_STR: str = "/api/v1"
-    
+    API_STR: str = "/api"
     # Database settings
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
