@@ -25,7 +25,6 @@ Café Fausse's website combines a modern, responsive frontend with a robust back
 - **Flask** - Python web framework
 - **SQLAlchemy** - SQL toolkit and ORM
 - **PostgreSQL** - Database
-- **Pydantic** - Data validation
 - **Poetry** - Python dependency management
 
 ## 📁 Project Structure 
