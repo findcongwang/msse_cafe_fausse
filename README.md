@@ -95,16 +95,21 @@ poetry run alembic upgrade head
 
 ### Running Locally
 
+1. Start the backend server (default port 8080):
 ```bash
 cd backend
-./build_and_import_app.sh
-poetry run uvicorn app.main:app --reload
+poetry run python -m app.main
+```
+
+2. In a new terminal, start the frontend server (default port 4321):
+```bash
+cd frontend
+npm run dev
 ```
 
 The application will be available at:
-- Frontend: http://localhost:8080
+- Frontend: http://localhost:4321
 - Backend API: http://localhost:8080/api
-- API Documentation: http://localhost:8080/api/docs
 
 ## 📄 License
 

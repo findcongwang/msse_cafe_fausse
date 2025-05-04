@@ -1,20 +1,14 @@
 from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
 from api.reservations import reservations_bp
-
+from api.newsletter import newsletter_bp
 app = Flask(__name__, static_folder='static', static_url_path='/')
 
 # Register the API controllers
 app.register_blueprint(reservations_bp)
-
+app.register_blueprint(newsletter_bp)
 
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
-
-@app.route('/api', methods=['GET'])
-def api_welcome():
-    return jsonify({
-        "message": "Welcome to the Cafe Fausse API"
-    })
 
 # Register custom 404 error handler
 @app.errorhandler(404)

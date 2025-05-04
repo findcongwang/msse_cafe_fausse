@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import NewsletterSignup from '../components/NewsletterSignup.astro';
+import NewsletterSignup from '../components/NewsletterSignup';
 ---
 
 <Layout>
@@ -21,6 +21,12 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
 				</div>
 			</div>
 		</section>
-		<NewsletterSignup />
+		<div class="newsletter-container bg-base-200 py-12 px-4">
+			<div class="max-w-3xl mx-auto text-center">
+				<h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+				<p class="text-lg mb-6">Subscribe to our newsletter for the latest updates, special offers, and culinary events.</p>
+				<NewsletterSignup client:load />
+			</div>
+		</div>
 	</main>
 </Layout>
