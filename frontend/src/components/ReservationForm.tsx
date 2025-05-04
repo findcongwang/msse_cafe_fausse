@@ -21,6 +21,7 @@ export function ReservationForm() {
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successDetails, setSuccessDetails] = useState('');
 
   const availableTimes = [
     '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM',
@@ -81,7 +82,7 @@ export function ReservationForm() {
       }
 
       const data = await response.json();
-      console.log(data);
+      setSuccessDetails(`Reservation created for ${data.data.name} (Party of ${data.data.guest_count}) at table #${data.data.table_number}!`);
 
       setStatus('success');
     } catch (error) {
@@ -95,7 +96,7 @@ export function ReservationForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="date" className="block text-sm font-medium text-gray-700">
-            Date
+            Date <span className="text-red-500">*</span>
           </label>
           <input
             type="date"
@@ -110,7 +111,7 @@ export function ReservationForm() {
 
         <div>
           <label htmlFor="time" className="block text-sm font-medium text-gray-700">
-            Time
+            Time <span className="text-red-500">*</span>
           </label>
           <select
             id="time"
@@ -128,7 +129,7 @@ export function ReservationForm() {
 
         <div>
           <label htmlFor="guests" className="block text-sm font-medium text-gray-700">
-            Number of Guests
+            Number of Guests <span className="text-red-500">*</span>
           </label>
           <select
             id="guests"
@@ -145,7 +146,7 @@ export function ReservationForm() {
 
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-            Full Name
+            Full Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -159,7 +160,7 @@ export function ReservationForm() {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email
+            Email <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
@@ -190,7 +191,7 @@ export function ReservationForm() {
       )}
 
       {status === 'success' && (
-        <div className="text-green-600 text-sm">Reservation successfully made!</div>
+        <div className="text-green-600 text-sm">{successDetails}</div>
       )}
 
       <button

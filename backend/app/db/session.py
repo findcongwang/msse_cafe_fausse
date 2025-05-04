@@ -1,28 +1,34 @@
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from .config import settings
+from contextlib import contextmanager
 
-# Create async engine
-engine = create_async_engine(
-    settings.SQLALCHEMY_DATABASE_URI,
+# Create sync engine for Flask
+engine = create_engine(
+    # If your connection string is currently using asyncpg, convert it to standard postgresql
+    settings.SQLALCHEMY_DATABASE_URI.replace("postgresql+asyncpg://", "postgresql://"),
     echo=settings.DB_ECHO,
     future=True,
     pool_pre_ping=True,
 )
 
-# Create async session factory
-AsyncSessionLocal = sessionmaker(
+# Create sync session factory
+SessionLocal = sessionmaker(
     engine,
-    class_=AsyncSession,
     expire_on_commit=False,
     autocommit=False,
     autoflush=False,
 )
 
-async def get_db() -> AsyncSession: # type: ignore
-    """Dependency for getting async database sessions."""
-    async with AsyncSessionLocal() as session:
-        try:
-            yield session
-        finally:
-            await session.close() 
+@contextmanager
+def get_db():
+    """Provides a synchronous database session as a context manager."""
+    session = SessionLocal()
+    try:
+        yield session
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close() 

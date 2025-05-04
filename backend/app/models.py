@@ -1,7 +1,9 @@
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, Time
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, Time, UniqueConstraint
 from sqlalchemy.orm import relationship
-from db.base import Base
+from app.db.base import Base
+
+print("Loading models.py module - ID:", id(Base))
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -29,6 +31,11 @@ class Reservation(Base):
     
     # Relationship
     customer = relationship("Customer", back_populates="reservations")
+    
+    # Add uniqueness constraint to prevent double booking
+    __table_args__ = (
+        UniqueConstraint('table_number', 'reservation_date', name='uix_reservation_table_date'),
+    )
 
 class Newsletter(Base):
     __tablename__ = "newsletter_subscribers"

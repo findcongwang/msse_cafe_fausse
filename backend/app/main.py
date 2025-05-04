@@ -10,11 +10,11 @@ app.register_blueprint(reservations_bp)
 
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
-# @app.route('/api', methods=['GET'])
-# def api_welcome():
-#     return jsonify({
-#         "message": "Welcome to the Cafe Fausse API"
-#     })
+@app.route('/api', methods=['GET'])
+def api_welcome():
+    return jsonify({
+        "message": "Welcome to the Cafe Fausse API"
+    })
 
 # Register custom 404 error handler
 @app.errorhandler(404)

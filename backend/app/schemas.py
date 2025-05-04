@@ -37,14 +37,3 @@ class Reservation(ReservationBase):
 
 class NewsletterSubscribe(BaseModel):
     email: EmailStr
-
-class TableBase(BaseModel):
-    table_number: int
-    capacity: int
-
-class Table(TableBase):
-    id: int
-    is_active: bool
-    
-    class Config:
-        from_attributes = True 
